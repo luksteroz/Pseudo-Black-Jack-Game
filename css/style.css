@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.turn {
+    background-color: green;
+    text-align: center;
+    border: 1px solid black;
+}
+.detail-user {
+    border: 1px solid black;
+}
+.history {
+    background-color: red;
+    height: 100px;
+}
+.summary {
+    background-color: violet;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+}
+.card {
+    background-color: yellow;
+    height: 500px;
+    border: 1px solid orange;
+}
+.choosen-card {
+    margin: 0 auto;
+    height: 400px;
+    width: 300px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: 50px;
+}
+.name-choosen-card {
+    text-align: center;
+    line-height: 400px;
+}
+.buttons {
+    text-align: center;
+    height: 100px;
+    border: 1px solid black;
+    border-top: none;
+}
+.button-section {
+    margin-top: 30px;
+}
+button {
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+}
