@@ -83,8 +83,9 @@
         const card = array.pop();
 
         choosenCard.innerText = card;
+        history.innerText = summaryCard.length === 0 ? 'Historia' : summaryCard;
+        console.log(summaryCard);
         summaryCard.push( card );
-        history.innerText = summaryCard;
 
         return card
     }

@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    margin: 20px;
+}
+
 .invisible {
     display: none;
 }
@@ -16,6 +20,7 @@
 
 .detail-user {
     border: 1px solid black;
+    border-bottom: none;
 }
 
 .history {
@@ -34,17 +39,18 @@
 
 .card {
     background-color: yellow;
-    height: 500px;
+    height: 600px;
     border: 1px solid orange;
 }
 
 .choosen-card {
     margin: 0 auto;
     height: 400px;
-    width: 70%;
+    width: 60%;
     background-color: white;
-    border-radius: 20px;
-    margin-top: 50px;
+    border-radius: 25px;
+    border: 1px solid black;
+    margin-top: 100px;
 }
 
 .name-choosen-card {
@@ -54,19 +60,20 @@
 
 .buttons {
     text-align: center;
-    height: 100px;
+    height: 80px;
     border: 1px solid black;
     border-top: none;
 }
 
 .button-section {
-    margin-top: 30px;
+    margin-top: 10px;
 }
 
 button {
-    height: 40px;
-    width: 100px;
-    border-radius: 5px;
+    height: 60px;
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 8px;
 }
 
 #over {
