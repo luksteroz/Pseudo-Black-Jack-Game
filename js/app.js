@@ -1,10 +1,15 @@
 (function() {
     'use strict';
 
+    // zmienne i stale
 
-
+        /**
+         * Opis [description]
+         * @param  {event} event Standardowy event
+         * @return {void}
+         */
         function domContentLoadedHandler(event) {
-            const cardArray = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K"],
+            const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
             summaryCardLeft = [],
             summaryCardRight = [],
             summaryPointsLeft = [],
@@ -23,49 +28,54 @@
             leftUserTurn.addEventListener('click', onClickLeftCardHandler);
             rightUserTurn.addEventListener('click', onClickRightCardHandler);
 
-            function onClickLeftCardHandler (event) {
-                event.preventDefault();
-                //wyłączenie przycisku kliknietego i wlaczenie drugiego
-                newAttribute(this, rightUserTurn);
-                //dodanie karty na stół
-                cardLeft.innerHTML = "<div class='choosen-card'><h1 class='name-choosen-card' id='left-choosen-card'></h1></div>";
-                //złapanie elementu karty
-                const leftChoosenCard = document.getElementById('left-choosen-card');
-                //wylosowanie numeru przez funkcję losującą
-                let card = randomNumber(summaryPointsLeft);
-                leftChoosenCard.innerText = card;
-                summaryCardLeft.push(card);
-                //wpisanie rezultatu
-                let result = summary(summaryPointsLeft);
-                summaryLeft.innerText = result;
-                checkWin(result, 'Zawodnik 1');
-                //dodanie karty do historii
-                historyLeft.innerText = summaryCardLeft;
-                //tura nastepnego gracza
-                nextTurn(2);
-            }
+            /**
+             * @param  {Object} event standardowy event
+             * @return {void}
+             */
+        function onClickLeftCardHandler (event) {
+            event.preventDefault();
+            //wyłączenie przycisku kliknietego i wlaczenie drugiego
+            /** @type {Boolean} [description] */
+            newAttribute(this, rightUserTurn);
+            //dodanie karty na stół
+            cardLeft.innerHTML = '<div class="choosen-card"><h1 class="name-choosen-card" id="left-choosen-card"></h1></div>';
+            //złapanie elementu karty
+            const leftChoosenCard = document.getElementById('left-choosen-card');
+            //wylosowanie numeru przez funkcję losującą
+            let card = randomNumber(summaryPointsLeft);
+            leftChoosenCard.innerText = card;
+            summaryCardLeft.push(card);
+            //wpisanie rezultatu
+            let result = summary(summaryPointsLeft);
+            summaryLeft.innerText = result;
+            checkWin(result, 'Zawodnik 1');
+            //dodanie karty do historii
+            historyLeft.innerText = summaryCardLeft;
+            //tura nastepnego gracza
+            nextTurn(2);
+        }
 
 
-            function onClickRightCardHandler (event) {
-                event.preventDefault();
-                console.log(this)
-                newAttribute(this, leftUserTurn);
-                //wyłączenie przycisku kliknietego i wlaczenie drugiego
-                cardRight.innerHTML = "<div class='choosen-card'><h1 class='name-choosen-card' id='right-choosen-card'></h1></div>";
+        function onClickRightCardHandler (event) {
+            event.preventDefault();
+            console.log(this)
+            newAttribute(this, leftUserTurn);
+            //wyłączenie przycisku kliknietego i wlaczenie drugiego
+            cardRight.innerHTML = '<div class="choosen-card"><h1 class="name-choosen-card" id="right-choosen-card"></h1></div>';
 
-                const rightChoosenCard = document.getElementById('right-choosen-card');
+            const rightChoosenCard = document.getElementById('right-choosen-card');
 
-                let card = randomNumber(summaryPointsRight);
-                rightChoosenCard.innerText = card;
-                summaryCardRight.push(card);
+            let card = randomNumber(summaryPointsRight);
+            rightChoosenCard.innerText = card;
+            summaryCardRight.push(card);
 
-                let result = summary(summaryPointsRight);
-                summaryRight.innerText = result;
-                checkWin(result, 'Zawodnik 2');
+            let result = summary(summaryPointsRight);
+            summaryRight.innerText = result;
+            checkWin(result, 'Zawodnik 2');
 
-                historyRight.innerText = summaryCardRight;
-                nextTurn(1);
-            }
+            historyRight.innerText = summaryCardRight;
+            nextTurn(1);
+        }
 
         const newAttribute = (button, player) => {
             console.log(button, "to jest button");
@@ -77,6 +87,11 @@
             return Math.floor((Math.random() * 11))
         }
 
+        /**
+         *
+         * @param  {array} array talica z wartościami liczbowymi
+         * @return {string} card z wartością karty
+         */
         const randomNumber = (array) => {
             let random = randomCard();
             const card = cardArray[random];
@@ -110,4 +125,10 @@
 
     }
     document.addEventListener('DOMContentLoaded', domContentLoadedHandler);
+    let navbar = [];
+
+    (function() {
+        navbar = document.querySelector('.navbar');
+        // listnery
+    })();
 })();
