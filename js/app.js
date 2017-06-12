@@ -1,5 +1,9 @@
-(function() {
-    'use strict';
+import { createCard } from './createCard.js';
+import { firstTurn } from './firstTurn.js';
+import { nextTurn } from './nextTurn.js';
+import { randomCard } from './randomCard.js';
+import { summary } from './summary.js';
+
 
     // zmienne i stale
     const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
@@ -18,14 +22,16 @@
     summaryRight = document.getElementById( 'summary-right' ),
     cardLeft = document.querySelector( '.card-left' ),
     cardRight = document.querySelector( '.card-right' ),
-    playerWin = document.getElementById( 'winner-player' ),
+    playerWin = document.getElementById( 'player-win' ),
     overSection = document.getElementById( 'over' );
+
+    firstTurn( buttons );
 
     function onClickLeftCardHandler ( event ) {
         event.preventDefault();
         //wyłączenie przycisku kliknietego i wlaczenie drugiego
         /** @type {Boolean} [description] */
-        newAttribute( this, rightUserTurn );
+        nextTurn( this, rightUserTurn, 2 );
         //dodanie karty na stół
         //złapanie elementu karty
         cardLeft.hasChildNodes() ? console.log("później") : createCard(cardLeft, 'left-choosen-card');
@@ -38,14 +44,12 @@
         summary( summaryPointsLeft, card, summaryLeft, 1);
         //dodanie karty do historii
         //tura nastepnego gracza
-        nextTurn(2);
     }
 
 
     function onClickRightCardHandler ( event ) {
         event.preventDefault();
-        newAttribute( this, leftUserTurn );
-        //wyłączenie przycisku kliknietego i wlaczenie drugiego
+        nextTurn( this, leftUserTurn, 1 );
         cardRight.hasChildNodes() ? console.log("później") : createCard(cardRight, 'right-choosen-card');
 
         const rightChoosenCard = document.getElementById( 'right-choosen-card' );
@@ -53,87 +57,16 @@
         let card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
         summary( summaryPointsRight, card, summaryRight, 2 );
-        nextTurn(1);
-    }
-    const createCard = (card, id) => {
-        const choosenCardDiv = document.createElement( 'div' );
-        choosenCardDiv.classList.add( 'choosen-card', 'animated', 'bounce' );
-        card.appendChild(choosenCardDiv);
-
-        const nameChoosenCardHeader = document.createElement( 'h1' );
-        nameChoosenCardHeader.classList.add( 'name-choosen-card' );
-        nameChoosenCardHeader.id = id;
-        choosenCardDiv.appendChild(nameChoosenCardHeader);
     }
 
-    const newAttribute = ( button, player ) => {
-        console.log( button, 'to jest button' );
-        button.setAttribute( 'disabled', 'disabled' );
-        player.removeAttribute( 'disabled' );
-    }
 
-    const randomNumber= ( length ) => {
-        return Math.floor(( Math.random() * length ))
-    }
 
-    /**
-     *
-     * @param  {array} array talica z wartościami liczbowymi
-     * @return {string} card z wartością karty
-     */
-    const randomCard = ( array, choosenCard, summaryCard, history ) => {
-        const card = array.pop();
 
-        choosenCard.innerText = card;
-        history.innerText = summaryCard.length === 0 ? 'Historia' : summaryCard;
-        console.log(summaryCard);
-        summaryCard.push( card );
-
-        return card
-    }
-
-    const summary = ( array, card, summary, player ) => {
-        const points = cardArray.indexOf(card);
-        array.push(points + 1);
-        const summaryResult = array.reduce((prev, curr) => prev + curr);
-        summary.innerText = summaryResult;
-
-        checkWin( summaryResult, player );
-
-        return summaryResult;
-    }
-
-    const nextTurn = ( number ) => {
-        turnUser.innerText = number;
-    }
-
-    const checkWin = ( result, player ) => {
-        if (result > 21) {
-            console.log('zawodnik', player, 'wygrał!!!!!')
-            overSection.style.display =  'block';
-            playerWin.innerText = "Zawodnik " + player + " wygrał";
-        }
-    }
-
-    const firstTurn = () => {
-        let whoFirst = Math.floor(( Math.random() * buttons.length ));
-        buttons[whoFirst].removeAttribute('disabled');
-        nextTurn(whoFirst + 1);
-
-        randomDeck();
-    }
-
-    const randomDeck = () => {
-        for (var i = 1; i <= 100; i++) {
-            let singleCard = cardArray[randomNumber( cardArray.length )];
-            deckCards.push(singleCard);
-        }
-    }
-    firstTurn();
 
     (function() {
         leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
         rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
     })();
 
-})();
+
+export { randomDeck, cardArray, playerWin, overSection, deckCards, turnUser };

@@ -63,15 +63,63 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-(function() {
-    'use strict';
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return firstTurn; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nextTurn_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__randomNumber_js__ = __webpack_require__(5);
+
+
+
+
+const firstTurn = ( buttons ) => {
+        let whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
+        buttons[whoFirst].removeAttribute('disabled');
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nextTurn_js__["b" /* nextPlayer */])(whoFirst + 1);
+
+        randomDeck();
+    }
+
+const randomDeck = () => {
+    for (var i = 1; i <= 100; i++) {
+        let singleCard = __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"][__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"].length )];
+        __WEBPACK_IMPORTED_MODULE_1__app_js__["deckCards"].push(singleCard);
+    }
+}
+
+
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randomDeck", function() { return randomDeck; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cardArray", function() { return cardArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "playerWin", function() { return playerWin; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "overSection", function() { return overSection; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deckCards", function() { return deckCards; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnUser", function() { return turnUser; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createCard_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__firstTurn_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__nextTurn_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__randomCard_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__summary_js__ = __webpack_require__(4);
+
+
+
+
+
+
 
     // zmienne i stale
     const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
@@ -90,125 +138,161 @@
     summaryRight = document.getElementById( 'summary-right' ),
     cardLeft = document.querySelector( '.card-left' ),
     cardRight = document.querySelector( '.card-right' ),
-    playerWin = document.getElementById( 'winner-player' ),
+    playerWin = document.getElementById( 'player-win' ),
     overSection = document.getElementById( 'over' );
+
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__firstTurn_js__["a" /* firstTurn */])( buttons );
 
     function onClickLeftCardHandler ( event ) {
         event.preventDefault();
         //wyłączenie przycisku kliknietego i wlaczenie drugiego
         /** @type {Boolean} [description] */
-        newAttribute( this, rightUserTurn );
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, rightUserTurn, 2 );
         //dodanie karty na stół
         //złapanie elementu karty
-        cardLeft.hasChildNodes() ? console.log("później") : createCard(cardLeft, 'left-choosen-card');
+        cardLeft.hasChildNodes() ? console.log("później") : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardLeft, 'left-choosen-card');
 
         const leftChoosenCard = document.getElementById( 'left-choosen-card' );
         //wylosowanie numeru przez funkcję losującą
-        let card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
+        let card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
         //wpisanie rezultatu
-        summary( summaryPointsLeft, card, summaryLeft, 1);
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsLeft, card, summaryLeft, 1);
         //dodanie karty do historii
         //tura nastepnego gracza
-        nextTurn(2);
     }
 
 
     function onClickRightCardHandler ( event ) {
         event.preventDefault();
-        newAttribute( this, leftUserTurn );
-        //wyłączenie przycisku kliknietego i wlaczenie drugiego
-        cardRight.hasChildNodes() ? console.log("później") : createCard(cardRight, 'right-choosen-card');
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, leftUserTurn, 1 );
+        cardRight.hasChildNodes() ? console.log("później") : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardRight, 'right-choosen-card');
 
         const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
-        let card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
+        let card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
-        summary( summaryPointsRight, card, summaryRight, 2 );
-        nextTurn(1);
-    }
-    const createCard = (card, id) => {
-        const choosenCardDiv = document.createElement( 'div' );
-        choosenCardDiv.classList.add( 'choosen-card', 'animated', 'bounce' );
-        card.appendChild(choosenCardDiv);
-
-        const nameChoosenCardHeader = document.createElement( 'h1' );
-        nameChoosenCardHeader.classList.add( 'name-choosen-card' );
-        nameChoosenCardHeader.id = id;
-        choosenCardDiv.appendChild(nameChoosenCardHeader);
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsRight, card, summaryRight, 2 );
     }
 
-    const newAttribute = ( button, player ) => {
-        console.log( button, 'to jest button' );
-        button.setAttribute( 'disabled', 'disabled' );
-        player.removeAttribute( 'disabled' );
-    }
 
-    const randomNumber= ( length ) => {
-        return Math.floor(( Math.random() * length ))
-    }
 
-    /**
-     *
-     * @param  {array} array talica z wartościami liczbowymi
-     * @return {string} card z wartością karty
-     */
-    const randomCard = ( array, choosenCard, summaryCard, history ) => {
-        const card = array.pop();
 
-        choosenCard.innerText = card;
-        history.innerText = summaryCard.length === 0 ? 'Historia' : summaryCard;
-        console.log(summaryCard);
-        summaryCard.push( card );
-
-        return card
-    }
-
-    const summary = ( array, card, summary, player ) => {
-        const points = cardArray.indexOf(card);
-        array.push(points + 1);
-        const summaryResult = array.reduce((prev, curr) => prev + curr);
-        summary.innerText = summaryResult;
-
-        checkWin( summaryResult, player );
-
-        return summaryResult;
-    }
-
-    const nextTurn = ( number ) => {
-        turnUser.innerText = number;
-    }
-
-    const checkWin = ( result, player ) => {
-        if (result > 21) {
-            console.log('zawodnik', player, 'wygrał!!!!!')
-            overSection.style.display =  'block';
-            playerWin.innerText = "Zawodnik " + player + " wygrał";
-        }
-    }
-
-    const firstTurn = () => {
-        let whoFirst = Math.floor(( Math.random() * buttons.length ));
-        buttons[whoFirst].removeAttribute('disabled');
-        nextTurn(whoFirst + 1);
-
-        randomDeck();
-    }
-
-    const randomDeck = () => {
-        for (var i = 1; i <= 100; i++) {
-            let singleCard = cardArray[randomNumber( cardArray.length )];
-            deckCards.push(singleCard);
-        }
-    }
-    firstTurn();
 
     (function() {
         leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
         rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
     })();
 
-})();
+
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return randomCard; });
+
+
+const randomCard = ( array, choosenCard, summaryCard, history ) => {
+    const card = array.pop();
+
+    choosenCard.innerText = card;
+    history.innerText = summaryCard.length === 0 ? 'Historia' : summaryCard;
+    summaryCard.push( card );
+
+    return card
+}
+
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createCard; });
+const createCard = (card, id) => {
+    const choosenCardDiv = document.createElement( 'div' );
+    choosenCardDiv.classList.add( 'choosen-card', 'animated', 'bounce' );
+    card.appendChild(choosenCardDiv);
+
+    const nameChoosenCardHeader = document.createElement( 'h1' );
+    nameChoosenCardHeader.classList.add( 'name-choosen-card' );
+    nameChoosenCardHeader.id = id;
+    choosenCardDiv.appendChild(nameChoosenCardHeader);
+}
+
+
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return summary; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(1);
+
+
+const summary = ( array, card, summary, player ) => {
+    const points = __WEBPACK_IMPORTED_MODULE_0__app_js__["cardArray"].indexOf(card);
+    array.push(points + 1);
+    const summaryResult = array.reduce((prev, curr) => prev + curr);
+    summary.innerText = summaryResult;
+
+    checkWin( summaryResult, player, over );
+
+    return summaryResult;
+}
+
+const checkWin = ( result, player ) => {
+    if (result > 21) {
+        __WEBPACK_IMPORTED_MODULE_0__app_js__["overSection"].style.display =  'block';
+        __WEBPACK_IMPORTED_MODULE_0__app_js__["playerWin"].innerText = "Zawodnik " + player + " wygrał";
+    }
+}
+
+
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return randomNumber; });
+const randomNumber= ( length ) => {
+    return Math.floor(( Math.random() * length ))
+}
+
+
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return nextTurn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return nextPlayer; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(1);
+
+
+    const nextTurn = ( button, player, number ) => {
+        button.setAttribute( 'disabled', 'disabled' );
+        player.removeAttribute( 'disabled' );
+        nextPlayer( number );
+    }
+
+    const nextPlayer = ( number ) => {
+        __WEBPACK_IMPORTED_MODULE_0__app_js__["turnUser"].innerText = number;
+    }
+
+
 
 
 /***/ })
