@@ -139,7 +139,6 @@
     const newAttribute = ( button, player ) => {
         console.log( button, 'to jest button' );
         button.setAttribute( 'disabled', 'disabled' );
-        button.setAttribute( 'autofocus', 'autofocus' );
         player.removeAttribute( 'disabled' );
     }
 
