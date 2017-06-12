@@ -63,42 +63,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return firstTurn; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nextTurn_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_js__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__randomNumber_js__ = __webpack_require__(5);
-
-
-
-
-const firstTurn = ( buttons ) => {
-        let whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
-        buttons[whoFirst].removeAttribute('disabled');
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nextTurn_js__["b" /* nextPlayer */])(whoFirst + 1);
-
-        randomDeck();
-    }
-
-const randomDeck = () => {
-    for (var i = 1; i <= 100; i++) {
-        let singleCard = __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"][__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"].length )];
-        __WEBPACK_IMPORTED_MODULE_1__app_js__["deckCards"].push(singleCard);
-    }
-}
-
-
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -109,11 +78,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "overSection", function() { return overSection; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deckCards", function() { return deckCards; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "turnUser", function() { return turnUser; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createCard_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__firstTurn_js__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__nextTurn_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__randomCard_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__summary_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createCard_js__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__firstTurn_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__nextTurn_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__randomCard_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__summary_js__ = __webpack_require__(5);
 
 
 
@@ -189,7 +158,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return nextTurn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return nextPlayer; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(0);
+
+
+    const nextTurn = ( button, player, number ) => {
+        button.setAttribute( 'disabled', 'disabled' );
+        player.removeAttribute( 'disabled' );
+        nextPlayer( number );
+    }
+
+    const nextPlayer = ( number ) => {
+        __WEBPACK_IMPORTED_MODULE_0__app_js__["turnUser"].innerText = number;
+    }
+
+
+
+
+/***/ }),
 /* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createCard; });
+const createCard = (card, id) => {
+    const choosenCardDiv = document.createElement( 'div' );
+    choosenCardDiv.classList.add( 'choosen-card', 'animated', 'bounce' );
+    card.appendChild(choosenCardDiv);
+
+    const nameChoosenCardHeader = document.createElement( 'h1' );
+    nameChoosenCardHeader.classList.add( 'name-choosen-card' );
+    nameChoosenCardHeader.id = id;
+    choosenCardDiv.appendChild(nameChoosenCardHeader);
+}
+
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return firstTurn; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__nextTurn_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__randomNumber_js__ = __webpack_require__(6);
+
+
+
+
+const firstTurn = ( buttons ) => {
+        let whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
+        buttons[whoFirst].removeAttribute('disabled');
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nextTurn_js__["b" /* nextPlayer */])(whoFirst + 1);
+
+        randomDeck();
+    }
+
+const randomDeck = () => {
+    for (var i = 1; i <= 100; i++) {
+        let singleCard = __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"][__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"].length )];
+        __WEBPACK_IMPORTED_MODULE_1__app_js__["deckCards"].push(singleCard);
+    }
+}
+
+
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -210,32 +253,12 @@ const randomCard = ( array, choosenCard, summaryCard, history ) => {
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createCard; });
-const createCard = (card, id) => {
-    const choosenCardDiv = document.createElement( 'div' );
-    choosenCardDiv.classList.add( 'choosen-card', 'animated', 'bounce' );
-    card.appendChild(choosenCardDiv);
-
-    const nameChoosenCardHeader = document.createElement( 'h1' );
-    nameChoosenCardHeader.classList.add( 'name-choosen-card' );
-    nameChoosenCardHeader.id = id;
-    choosenCardDiv.appendChild(nameChoosenCardHeader);
-}
-
-
-
-
-/***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return summary; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(0);
 
 
 const summary = ( array, card, summary, player ) => {
@@ -260,7 +283,7 @@ const checkWin = ( result, player ) => {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -268,29 +291,6 @@ const checkWin = ( result, player ) => {
 const randomNumber= ( length ) => {
     return Math.floor(( Math.random() * length ))
 }
-
-
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return nextTurn; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return nextPlayer; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(1);
-
-
-    const nextTurn = ( button, player, number ) => {
-        button.setAttribute( 'disabled', 'disabled' );
-        player.removeAttribute( 'disabled' );
-        nextPlayer( number );
-    }
-
-    const nextPlayer = ( number ) => {
-        __WEBPACK_IMPORTED_MODULE_0__app_js__["turnUser"].innerText = number;
-    }
 
 
 
