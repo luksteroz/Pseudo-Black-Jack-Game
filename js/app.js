@@ -42,9 +42,7 @@
         let card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
         //wpisanie rezultatu
-        let result = summary( summaryPointsLeft, card );
-        summaryLeft.innerText = result;
-        checkWin( result, 'Zawodnik 1' );
+        summary( summaryPointsLeft, card, summaryLeft, 'Zawodnik 1');
         //dodanie karty do historii
         //tura nastepnego gracza
         nextTurn(2);
@@ -62,9 +60,7 @@
 
         let card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
-        let result = summary( summaryPointsRight, card );
-        summaryRight.innerText = result;
-        checkWin( result, 'Zawodnik 2' );
+        summary( summaryPointsRight, card, summaryRight, 'Zawodnik 2' );
 
         nextTurn(1);
     }
@@ -94,11 +90,15 @@
         return card
     }
 
-    const summary = ( array, card ) => {
+    const summary = ( array, card, summary, player ) => {
         const points = cardArray.indexOf(card);
         array.push(points + 1);
+        const summaryResult = array.reduce((prev, curr) => prev + curr);
+        summary.innerText = summaryResult;
 
-        return array.reduce((prev, curr) => prev + curr);
+        checkWin( summaryResult, player );
+
+        return summaryResult;
     }
 
     const nextTurn = ( number ) => {
@@ -112,7 +112,7 @@
     }
 
     const firstTurn = () => {
-        let whoFirst = Math.floor(( Math.random() * 2 ));
+        let whoFirst = Math.floor(( Math.random() * buttons.length ));
         buttons[whoFirst].removeAttribute('disabled');
         nextTurn(whoFirst + 1);
 
