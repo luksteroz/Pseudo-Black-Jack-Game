@@ -12,7 +12,7 @@
 <body>
     <header>
         <div class="col-xs-12 turn">
-            <h1>
+            <h1 class="animated jello">
                 Oczekiwanie na ruch: zawodnik <span id="turn-user">1</span>
             </h1>
         </div>
@@ -20,7 +20,7 @@
     <section>
             <div class="detail-user col-xs-6">
                 <div class="history col-xs-9">
-                    <h1 id="history-left" class="animated bounce">Historia</h1>
+                    <h1 id="history-left">Historia</h1>
                 </div>
                 <div class="summary col-xs-3">
                     <p id="summary-left"></p>
@@ -31,7 +31,7 @@
                     <p id="summary-right"></p>
                 </div>
                 <div class="history col-xs-9">
-                    <h1 id="history-right" class="animated bounce">Historia</h1>
+                    <h1 id="history-right">Historia</h1>
                 </div>
             </div>
     </section>
@@ -41,14 +41,14 @@
     </section>
     <section class="buttons col-xs-12">
         <div class="button-section col-xs-6">
-            <button id="left-user-turn" disabled>Losuj</button>
+            <button id="left-user-turn" disabled class="animated pulse">Losuj</button>
         </div>
         <div class="button-section col-xs-6">
-            <button id="right-user-turn" disabled>Losuj</button>
+            <button id="right-user-turn" disabled class="animated pulse">Losuj</button>
         </div>
     </section>
-    <section id="over" class="invisible">
-        <h1 class="winner-player">Zawodnik 1 wygrał!</h1>
+    <section id="over" class="invisible animated tada">
+        <h1 id="winner-player">Zawodnik 1 wygrał!</h1>
         <a class="try-again" href="#">Try Again</a>
     </section>
     <script src="js/out.js"></script>

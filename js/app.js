@@ -17,32 +17,25 @@
     summaryLeft = document.getElementById( 'summary-left' ),
     summaryRight = document.getElementById( 'summary-right' ),
     cardLeft = document.querySelector( '.card-left' ),
-    cardRight = document.querySelector( '.card-right' );
-    /**
-     * Opis [description]
-     * @param  {event} event Standardowy event
-     * @return {void}
-     */
+    cardRight = document.querySelector( '.card-right' ),
+    playerWin = document.getElementById( 'winner-player' ),
+    overSection = document.getElementById( 'over' );
 
-
-        /**
-         * @param  {Object} event standardowy event
-         * @return {void}
-         */
     function onClickLeftCardHandler ( event ) {
         event.preventDefault();
         //wyłączenie przycisku kliknietego i wlaczenie drugiego
         /** @type {Boolean} [description] */
         newAttribute( this, rightUserTurn );
         //dodanie karty na stół
-        cardLeft.innerHTML = '<div class="choosen-card"><h1 class="name-choosen-card" id="left-choosen-card"></h1></div>';
         //złapanie elementu karty
+        cardLeft.hasChildNodes() ? console.log("później") : createCard(cardLeft, 'left-choosen-card');
+
         const leftChoosenCard = document.getElementById( 'left-choosen-card' );
         //wylosowanie numeru przez funkcję losującą
         let card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
         //wpisanie rezultatu
-        summary( summaryPointsLeft, card, summaryLeft, 'Zawodnik 1');
+        summary( summaryPointsLeft, card, summaryLeft, 1);
         //dodanie karty do historii
         //tura nastepnego gracza
         nextTurn(2);
@@ -53,15 +46,24 @@
         event.preventDefault();
         newAttribute( this, leftUserTurn );
         //wyłączenie przycisku kliknietego i wlaczenie drugiego
-        cardRight.innerHTML = '<div class="choosen-card"><h1 class="name-choosen-card" id="right-choosen-card"></h1></div>';
+        cardRight.hasChildNodes() ? console.log("później") : createCard(cardRight, 'right-choosen-card');
 
         const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
         let card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
-        summary( summaryPointsRight, card, summaryRight, 'Zawodnik 2' );
-
+        summary( summaryPointsRight, card, summaryRight, 2 );
         nextTurn(1);
+    }
+    const createCard = (card, id) => {
+        const choosenCardDiv = document.createElement( 'div' );
+        choosenCardDiv.classList.add( 'choosen-card', 'animated', 'bounce' );
+        card.appendChild(choosenCardDiv);
+
+        const nameChoosenCardHeader = document.createElement( 'h1' );
+        nameChoosenCardHeader.classList.add( 'name-choosen-card' );
+        nameChoosenCardHeader.id = id;
+        choosenCardDiv.appendChild(nameChoosenCardHeader);
     }
 
     const newAttribute = ( button, player ) => {
@@ -107,7 +109,9 @@
 
     const checkWin = ( result, player ) => {
         if (result > 21) {
-            console.log(player, 'wygrał!!!!!')
+            console.log('zawodnik', player, 'wygrał!!!!!')
+            overSection.style.display =  'block';
+            playerWin.innerText = "Zawodnik " + player + " wygrał";
         }
     }
 
