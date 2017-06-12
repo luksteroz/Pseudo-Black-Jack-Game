@@ -123,7 +123,6 @@
 
     function onClickRightCardHandler ( event ) {
         event.preventDefault();
-        console.log( this )
         newAttribute( this, leftUserTurn );
         //wyłączenie przycisku kliknietego i wlaczenie drugiego
         cardRight.innerHTML = '<div class="choosen-card"><h1 class="name-choosen-card" id="right-choosen-card"></h1></div>';
@@ -140,6 +139,7 @@
     const newAttribute = ( button, player ) => {
         console.log( button, 'to jest button' );
         button.setAttribute( 'disabled', 'disabled' );
+        button.setAttribute( 'autofocus', 'autofocus' );
         player.removeAttribute( 'disabled' );
     }
 
@@ -196,7 +196,6 @@
             let singleCard = cardArray[randomNumber( cardArray.length )];
             deckCards.push(singleCard);
         }
-        console.log(deckCards);
     }
     firstTurn();
 
