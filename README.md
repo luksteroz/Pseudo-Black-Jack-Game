@@ -7,8 +7,8 @@ Training with ES6
 
 Zasady:
 - rozgrywka dla dwóch osób,
-- talia wylosowanych 100 kart,
-- karty jako litery alfabetu od A-1pkt. -> K-11pkt.
+- talia to losowe 100 kart,
+- karty jako litery alfabetu od A-1pkt. do K-11pkt.
 - grę rozpoczyna losowo wybrany gracz, 
 - karta ląduje na stole po przycisku "Losuj",
 - wygrywa gracz, który pierwszy przekroczy 21 punktów.
