@@ -89,72 +89,83 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+/**
+ * [cardArray z tej tablicy są losowane karty do całej talii]
+ * @type {Array}
+ */
+const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
+deckCards = [],
+summaryCardLeft = [],
+summaryCardRight = [],
+summaryPointsLeft = [],
+summaryPointsRight = [],
+leftUserTurn = document.getElementById( 'left-user-turn' ),
+rightUserTurn = document.getElementById( 'right-user-turn' ),
+buttons = document.querySelectorAll( 'button' ),
+turnUser = document.getElementById( 'turn-user' ),
+historyLeft = document.getElementById( 'history-left' ),
+historyRight = document.getElementById( 'history-right' ),
+summaryLeft = document.getElementById( 'summary-left' ),
+summaryRight = document.getElementById( 'summary-right' ),
+cardLeft = document.querySelector( '.card-left' ),
+cardRight = document.querySelector( '.card-right' ),
+playerWin = document.getElementById( 'player-win' ),
+overSection = document.getElementById( 'over' ),
+tryAgain = document.querySelector( '.try-again' );
+/**
+ * wywołanie funkcji rozpoczynającej grę
+ */
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__firstTurn_js__["a" /* firstTurn */])( buttons );
 
-    const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
-    deckCards = [],
-    summaryCardLeft = [],
-    summaryCardRight = [],
-    summaryPointsLeft = [],
-    summaryPointsRight = [],
-    leftUserTurn = document.getElementById( 'left-user-turn' ),
-    rightUserTurn = document.getElementById( 'right-user-turn' ),
-    buttons = document.querySelectorAll( 'button' ),
-    turnUser = document.getElementById( 'turn-user' ),
-    historyLeft = document.getElementById( 'history-left' ),
-    historyRight = document.getElementById( 'history-right' ),
-    summaryLeft = document.getElementById( 'summary-left' ),
-    summaryRight = document.getElementById( 'summary-right' ),
-    cardLeft = document.querySelector( '.card-left' ),
-    cardRight = document.querySelector( '.card-right' ),
-    playerWin = document.getElementById( 'player-win' ),
-    overSection = document.getElementById( 'over' ),
-    tryAgain = document.querySelector( '.try-again' );
+/**
+ * [funkcja odpowiada za event wykonany na przycisku zawodnika 1]
+ * @param  {event} [click]
+ */
+function onClickLeftCardHandler ( event ) {
+    event.preventDefault();
 
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__firstTurn_js__["a" /* firstTurn */])( buttons );
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, rightUserTurn, 2 );
 
-    function onClickLeftCardHandler ( event ) {
-        event.preventDefault();
+    cardLeft.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardLeft, 'left-choosen-card');
 
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, rightUserTurn, 2 );
+    const leftChoosenCard = document.getElementById( 'left-choosen-card' );
 
-        cardLeft.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardLeft, 'left-choosen-card');
+    const card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
-        const leftChoosenCard = document.getElementById( 'left-choosen-card' );
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsLeft, card, summaryLeft, 1);
+}
+/**
+ * [funkcja odpowiada za event wykonany na przycisku zawodnika 2]
+ * @param  {event} [click]
+ */
+function onClickRightCardHandler ( event ) {
+    event.preventDefault();
 
-        const card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, leftUserTurn, 1 );
 
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsLeft, card, summaryLeft, 1);
+    cardRight.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardRight, 'right-choosen-card');
 
-    }
+    const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
+    const card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
-    function onClickRightCardHandler ( event ) {
-        event.preventDefault();
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsRight, card, summaryRight, 2 );
+}
 
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, leftUserTurn, 1 );
-
-        cardRight.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardRight, 'right-choosen-card');
-
-        const rightChoosenCard = document.getElementById( 'right-choosen-card' );
-
-        const card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, rightChoosenCard, summaryCardRight, historyRight );
-
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsRight, card, summaryRight, 2 );
-    }
-
-    function onClickTryAgainHandler (event) {
-        event.preventDefault();
-        location.reload();
-    }
+/**'
+     * [po wcisnieciu przycisku 'try again i przeladowaniu strony]
+ * @param  {event}       [click]
+ */
+function onClickTryAgainHandler (event) {
+    event.preventDefault();
+    location.reload();
+}
 
 (function() {
     leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
     rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
     tryAgain.addEventListener( 'click', onClickTryAgainHandler );
 })();
-
-
-
 
 
 
@@ -168,13 +179,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return nextPlayer; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(0);
 
-
+/**
+ * [funkcja odpalająca następną turę]
+ * @param  {[object]} button [button na ktorym został przekazany event]
+ * @param  {[oject]} player [button drugiego przeciwnika]
+ * @param  {[number]} number [wskazanie nastepnego gracza]
+ */
 const nextTurn = ( button, player, number ) => {
     button.setAttribute( 'disabled', 'disabled' );
     player.removeAttribute( 'disabled' );
     nextPlayer( number );
 }
-
+/**
+ * [funkcja wypisująca nazwę aktywnego gracza]
+ * @param  {[number]} number [przekazanie następnego gracza]
+ */
 const nextPlayer = ( number ) => {
     __WEBPACK_IMPORTED_MODULE_0__app_js__["turnUser"].innerText = number;
 }
@@ -188,6 +207,12 @@ const nextPlayer = ( number ) => {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return createCard; });
+/**
+ * [funkcja tworząca kartę na stole do gry]
+ * @param  {[object]} card [parent nowego elementu]
+ * @param  {[string]} id   [nazwa id nowego elementu]
+ * @return {[type]}      [description]
+ */
 const createCard = (card, id) => {
     const choosenCardDiv = document.createElement( 'div' );
     choosenCardDiv.classList.add( 'choosen-card', 'animated', 'bounce' );
@@ -215,6 +240,10 @@ const createCard = (card, id) => {
 
 
 
+/**
+ * [funkcja losująca pierwszego gracza]
+ * @param  {[array]} buttons [tablica z buttonami]
+ */
 const firstTurn = ( buttons ) => {
     const whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
     buttons[whoFirst].removeAttribute('disabled');
@@ -222,7 +251,9 @@ const firstTurn = ( buttons ) => {
 
     randomDeck();
 }
-
+/**
+ * [funkcja losująca talię kart]
+ */
 const randomDeck = () => {
     for (let i = 1; i <= 100; i++) {
         const singleCard = __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"][__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"].length )];
@@ -239,8 +270,14 @@ const randomDeck = () => {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return randomCard; });
-
-
+/**
+ * [funkcja losująca kartę]
+ * @param  {[array]} array       [tablica z całą talią kart]
+ * @param  {[object]} choosenCard [wskazanie miejsca podmiany karty (lewa/prawa)]
+ * @param  {[array]} summaryCard [suma punktów]
+ * @param  {[object]} history     [miejsce wpisania karty do historii]
+ * @return {[string]}             [zwraca kartę z talii]
+ */
 const randomCard = ( array, choosenCard, summaryCard, history ) => {
     const card = array.pop();
 
@@ -263,6 +300,13 @@ const randomCard = ( array, choosenCard, summaryCard, history ) => {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(0);
 
 
+/**
+ * [funkcja zliczająca punkty i wypisująca rezultat]
+ * @param  {[array]} array   [tablica z punktami konkretnego zawodnika]
+ * @param  {[string]} card    [wybrana karta z talii]
+ * @param  {[number]} summary [zliczenie punktów konkretnego zawodnika]
+ * @param  {[number]} player  [numer gracz]
+ */
 const summary = ( array, card, summary, player ) => {
     const points = __WEBPACK_IMPORTED_MODULE_0__app_js__["cardArray"].indexOf(card);
     array.push(points + 1);
@@ -271,9 +315,12 @@ const summary = ( array, card, summary, player ) => {
 
     checkWin( summaryResult, player, over );
 
-    return summaryResult;
 }
-
+/**
+ * [funkcja sprawdzająca zwyciężcę]
+ * @param  {[number]} result [rezultat konkretnego gracza]
+ * @param  {[number]} player [numer gracza]
+ */
 const checkWin = ( result, player ) => {
     if (result > 21) {
         __WEBPACK_IMPORTED_MODULE_0__app_js__["overSection"].style.display =  'block';
@@ -290,6 +337,11 @@ const checkWin = ( result, player ) => {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return randomNumber; });
+/**
+ * [funkcja losująca numer z podanej tablicy]
+ * @param  {[number]} length [długość tablicy do losowania]
+ * @return {[number]}        [zwraca wylosowany numer]
+ */
 const randomNumber= ( length ) => {
     return Math.floor(( Math.random() * length ))
 }

@@ -4,71 +4,82 @@ import { nextTurn } from './nextTurn.js';
 import { randomCard } from './randomCard.js';
 import { summary } from './summary.js';
 
+/**
+ * [cardArray z tej tablicy są losowane karty do całej talii]
+ * @type {Array}
+ */
+const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
+deckCards = [],
+summaryCardLeft = [],
+summaryCardRight = [],
+summaryPointsLeft = [],
+summaryPointsRight = [],
+leftUserTurn = document.getElementById( 'left-user-turn' ),
+rightUserTurn = document.getElementById( 'right-user-turn' ),
+buttons = document.querySelectorAll( 'button' ),
+turnUser = document.getElementById( 'turn-user' ),
+historyLeft = document.getElementById( 'history-left' ),
+historyRight = document.getElementById( 'history-right' ),
+summaryLeft = document.getElementById( 'summary-left' ),
+summaryRight = document.getElementById( 'summary-right' ),
+cardLeft = document.querySelector( '.card-left' ),
+cardRight = document.querySelector( '.card-right' ),
+playerWin = document.getElementById( 'player-win' ),
+overSection = document.getElementById( 'over' ),
+tryAgain = document.querySelector( '.try-again' );
+/**
+ * wywołanie funkcji rozpoczynającej grę
+ */
+firstTurn( buttons );
 
-    const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
-    deckCards = [],
-    summaryCardLeft = [],
-    summaryCardRight = [],
-    summaryPointsLeft = [],
-    summaryPointsRight = [],
-    leftUserTurn = document.getElementById( 'left-user-turn' ),
-    rightUserTurn = document.getElementById( 'right-user-turn' ),
-    buttons = document.querySelectorAll( 'button' ),
-    turnUser = document.getElementById( 'turn-user' ),
-    historyLeft = document.getElementById( 'history-left' ),
-    historyRight = document.getElementById( 'history-right' ),
-    summaryLeft = document.getElementById( 'summary-left' ),
-    summaryRight = document.getElementById( 'summary-right' ),
-    cardLeft = document.querySelector( '.card-left' ),
-    cardRight = document.querySelector( '.card-right' ),
-    playerWin = document.getElementById( 'player-win' ),
-    overSection = document.getElementById( 'over' ),
-    tryAgain = document.querySelector( '.try-again' );
+/**
+ * [funkcja odpowiada za event wykonany na przycisku zawodnika 1]
+ * @param  {event} [click]
+ */
+function onClickLeftCardHandler ( event ) {
+    event.preventDefault();
 
-    firstTurn( buttons );
+    nextTurn( this, rightUserTurn, 2 );
 
-    function onClickLeftCardHandler ( event ) {
-        event.preventDefault();
+    cardLeft.hasChildNodes() ? null : createCard(cardLeft, 'left-choosen-card');
 
-        nextTurn( this, rightUserTurn, 2 );
+    const leftChoosenCard = document.getElementById( 'left-choosen-card' );
 
-        cardLeft.hasChildNodes() ? null : createCard(cardLeft, 'left-choosen-card');
+    const card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
-        const leftChoosenCard = document.getElementById( 'left-choosen-card' );
+    summary( summaryPointsLeft, card, summaryLeft, 1);
+}
+/**
+ * [funkcja odpowiada za event wykonany na przycisku zawodnika 2]
+ * @param  {event} [click]
+ */
+function onClickRightCardHandler ( event ) {
+    event.preventDefault();
 
-        const card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
+    nextTurn( this, leftUserTurn, 1 );
 
-        summary( summaryPointsLeft, card, summaryLeft, 1);
+    cardRight.hasChildNodes() ? null : createCard(cardRight, 'right-choosen-card');
 
-    }
+    const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
+    const card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
-    function onClickRightCardHandler ( event ) {
-        event.preventDefault();
+    summary( summaryPointsRight, card, summaryRight, 2 );
+}
 
-        nextTurn( this, leftUserTurn, 1 );
-
-        cardRight.hasChildNodes() ? null : createCard(cardRight, 'right-choosen-card');
-
-        const rightChoosenCard = document.getElementById( 'right-choosen-card' );
-
-        const card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
-
-        summary( summaryPointsRight, card, summaryRight, 2 );
-    }
-
-    function onClickTryAgainHandler (event) {
-        event.preventDefault();
-        location.reload();
-    }
+/**'
+     * [po wcisnieciu przycisku 'try again i przeladowaniu strony]
+ * @param  {event}       [click]
+ */
+function onClickTryAgainHandler (event) {
+    event.preventDefault();
+    location.reload();
+}
 
 (function() {
     leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
     rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
     tryAgain.addEventListener( 'click', onClickTryAgainHandler );
 })();
-
-
-
 
 export { randomDeck, cardArray, playerWin, overSection, deckCards, turnUser };
