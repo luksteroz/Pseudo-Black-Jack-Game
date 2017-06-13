@@ -90,7 +90,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-    // zmienne i stale
     const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
     deckCards = [],
     summaryCardLeft = [],
@@ -108,34 +107,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     cardLeft = document.querySelector( '.card-left' ),
     cardRight = document.querySelector( '.card-right' ),
     playerWin = document.getElementById( 'player-win' ),
-    overSection = document.getElementById( 'over' );
+    overSection = document.getElementById( 'over' ),
+    tryAgain = document.querySelector( '.try-again' );
 
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__firstTurn_js__["a" /* firstTurn */])( buttons );
 
     function onClickLeftCardHandler ( event ) {
         event.preventDefault();
-        //wyłączenie przycisku kliknietego i wlaczenie drugiego
-        /** @type {Boolean} [description] */
+
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, rightUserTurn, 2 );
-        //dodanie karty na stół
-        //złapanie elementu karty
-        cardLeft.hasChildNodes() ? console.log("później") : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardLeft, 'left-choosen-card');
+
+        cardLeft.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardLeft, 'left-choosen-card');
 
         const leftChoosenCard = document.getElementById( 'left-choosen-card' );
-        //wylosowanie numeru przez funkcję losującą
+
         let card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
-        //wpisanie rezultatu
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsLeft, card, summaryLeft, 1);
-        //dodanie karty do historii
-        //tura nastepnego gracza
+
     }
 
 
     function onClickRightCardHandler ( event ) {
         event.preventDefault();
+
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, leftUserTurn, 1 );
-        cardRight.hasChildNodes() ? console.log("później") : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardRight, 'right-choosen-card');
+
+        cardRight.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardRight, 'right-choosen-card');
 
         const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
@@ -144,14 +142,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsRight, card, summaryRight, 2 );
     }
 
+    function onClickTryAgainHandler (event) {
+        event.preventDefault();
+        location.reload();
+    }
+
+(function() {
+    leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
+    rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
+    tryAgain.addEventListener( 'click', onClickTryAgainHandler );
+})();
 
 
-
-
-    (function() {
-        leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
-        rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
-    })();
 
 
 
@@ -167,15 +169,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(0);
 
 
-    const nextTurn = ( button, player, number ) => {
-        button.setAttribute( 'disabled', 'disabled' );
-        player.removeAttribute( 'disabled' );
-        nextPlayer( number );
-    }
+const nextTurn = ( button, player, number ) => {
+    button.setAttribute( 'disabled', 'disabled' );
+    player.removeAttribute( 'disabled' );
+    nextPlayer( number );
+}
 
-    const nextPlayer = ( number ) => {
-        __WEBPACK_IMPORTED_MODULE_0__app_js__["turnUser"].innerText = number;
-    }
+const nextPlayer = ( number ) => {
+    __WEBPACK_IMPORTED_MODULE_0__app_js__["turnUser"].innerText = number;
+}
 
 
 
@@ -214,12 +216,12 @@ const createCard = (card, id) => {
 
 
 const firstTurn = ( buttons ) => {
-        let whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
-        buttons[whoFirst].removeAttribute('disabled');
-        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nextTurn_js__["b" /* nextPlayer */])(whoFirst + 1);
+    let whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
+    buttons[whoFirst].removeAttribute('disabled');
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nextTurn_js__["b" /* nextPlayer */])(whoFirst + 1);
 
-        randomDeck();
-    }
+    randomDeck();
+}
 
 const randomDeck = () => {
     for (var i = 1; i <= 100; i++) {

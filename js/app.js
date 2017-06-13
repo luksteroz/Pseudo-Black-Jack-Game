@@ -5,7 +5,6 @@ import { randomCard } from './randomCard.js';
 import { summary } from './summary.js';
 
 
-    // zmienne i stale
     const cardArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'],
     deckCards = [],
     summaryCardLeft = [],
@@ -23,34 +22,33 @@ import { summary } from './summary.js';
     cardLeft = document.querySelector( '.card-left' ),
     cardRight = document.querySelector( '.card-right' ),
     playerWin = document.getElementById( 'player-win' ),
-    overSection = document.getElementById( 'over' );
+    overSection = document.getElementById( 'over' ),
+    tryAgain = document.querySelector( '.try-again' );
 
     firstTurn( buttons );
 
     function onClickLeftCardHandler ( event ) {
         event.preventDefault();
-        //wyłączenie przycisku kliknietego i wlaczenie drugiego
-        /** @type {Boolean} [description] */
+
         nextTurn( this, rightUserTurn, 2 );
-        //dodanie karty na stół
-        //złapanie elementu karty
-        cardLeft.hasChildNodes() ? console.log("później") : createCard(cardLeft, 'left-choosen-card');
+
+        cardLeft.hasChildNodes() ? null : createCard(cardLeft, 'left-choosen-card');
 
         const leftChoosenCard = document.getElementById( 'left-choosen-card' );
-        //wylosowanie numeru przez funkcję losującą
+
         let card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
-        //wpisanie rezultatu
         summary( summaryPointsLeft, card, summaryLeft, 1);
-        //dodanie karty do historii
-        //tura nastepnego gracza
+
     }
 
 
     function onClickRightCardHandler ( event ) {
         event.preventDefault();
+
         nextTurn( this, leftUserTurn, 1 );
-        cardRight.hasChildNodes() ? console.log("później") : createCard(cardRight, 'right-choosen-card');
+
+        cardRight.hasChildNodes() ? null : createCard(cardRight, 'right-choosen-card');
 
         const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
@@ -59,14 +57,18 @@ import { summary } from './summary.js';
         summary( summaryPointsRight, card, summaryRight, 2 );
     }
 
+    function onClickTryAgainHandler (event) {
+        event.preventDefault();
+        location.reload();
+    }
+
+(function() {
+    leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
+    rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
+    tryAgain.addEventListener( 'click', onClickTryAgainHandler );
+})();
 
 
-
-
-    (function() {
-        leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
-        rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
-    })();
 
 
 export { randomDeck, cardArray, playerWin, overSection, deckCards, turnUser };
