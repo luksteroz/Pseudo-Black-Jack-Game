@@ -36,7 +36,7 @@ import { summary } from './summary.js';
 
         const leftChoosenCard = document.getElementById( 'left-choosen-card' );
 
-        let card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
+        const card = randomCard( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
         summary( summaryPointsLeft, card, summaryLeft, 1);
 
@@ -52,7 +52,7 @@ import { summary } from './summary.js';
 
         const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
-        let card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
+        const card = randomCard( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
         summary( summaryPointsRight, card, summaryRight, 2 );
     }

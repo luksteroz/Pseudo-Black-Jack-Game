@@ -121,7 +121,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         const leftChoosenCard = document.getElementById( 'left-choosen-card' );
 
-        let card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
+        const card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, leftChoosenCard, summaryCardLeft, historyLeft );
 
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsLeft, card, summaryLeft, 1);
 
@@ -137,7 +137,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         const rightChoosenCard = document.getElementById( 'right-choosen-card' );
 
-        let card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, rightChoosenCard, summaryCardRight, historyRight );
+        const card = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__randomCard_js__["a" /* randomCard */])( deckCards, rightChoosenCard, summaryCardRight, historyRight );
 
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__summary_js__["a" /* summary */])( summaryPointsRight, card, summaryRight, 2 );
     }
@@ -216,7 +216,7 @@ const createCard = (card, id) => {
 
 
 const firstTurn = ( buttons ) => {
-    let whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
+    const whoFirst = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( buttons.length )
     buttons[whoFirst].removeAttribute('disabled');
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__nextTurn_js__["b" /* nextPlayer */])(whoFirst + 1);
 
@@ -224,8 +224,8 @@ const firstTurn = ( buttons ) => {
 }
 
 const randomDeck = () => {
-    for (var i = 1; i <= 100; i++) {
-        let singleCard = __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"][__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"].length )];
+    for (let i = 1; i <= 100; i++) {
+        const singleCard = __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"][__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__randomNumber_js__["a" /* randomNumber */])( __WEBPACK_IMPORTED_MODULE_1__app_js__["cardArray"].length )];
         __WEBPACK_IMPORTED_MODULE_1__app_js__["deckCards"].push(singleCard);
     }
 }

@@ -3,7 +3,7 @@ import { randomDeck, deckCards, cardArray, randomNumber } from './app.js'
 import {randomNumber} from './randomNumber.js';
 
 const firstTurn = ( buttons ) => {
-    let whoFirst = randomNumber( buttons.length )
+    const whoFirst = randomNumber( buttons.length )
     buttons[whoFirst].removeAttribute('disabled');
     nextPlayer(whoFirst + 1);
 
@@ -11,8 +11,8 @@ const firstTurn = ( buttons ) => {
 }
 
 const randomDeck = () => {
-    for (var i = 1; i <= 100; i++) {
-        let singleCard = cardArray[randomNumber( cardArray.length )];
+    for (let i = 1; i <= 100; i++) {
+        const singleCard = cardArray[randomNumber( cardArray.length )];
         deckCards.push(singleCard);
     }
 }
