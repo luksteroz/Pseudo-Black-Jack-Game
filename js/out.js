@@ -121,10 +121,10 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__firstTurn_js__["a" /* firstTu
  * [funkcja odpowiada za event wykonany na przycisku zawodnika 1]
  * @param  {event} [click]
  */
-function onClickLeftCardHandler ( event ) {
+const onClickLeftCardHandler = ( event ) => {
     event.preventDefault();
 
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, rightUserTurn, 2 );
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( event.currentTarget, rightUserTurn, 2 );
 
     cardLeft.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardLeft, 'left-choosen-card');
 
@@ -138,10 +138,10 @@ function onClickLeftCardHandler ( event ) {
  * [funkcja odpowiada za event wykonany na przycisku zawodnika 2]
  * @param  {event} [click]
  */
-function onClickRightCardHandler ( event ) {
+const onClickRightCardHandler = ( event ) => {
     event.preventDefault();
 
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( this, leftUserTurn, 1 );
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__nextTurn_js__["a" /* nextTurn */])( event.currentTarget, leftUserTurn, 1 );
 
     cardRight.hasChildNodes() ? null : __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__createCard_js__["a" /* createCard */])(cardRight, 'right-choosen-card');
 
@@ -156,12 +156,15 @@ function onClickRightCardHandler ( event ) {
      * [po wcisnieciu przycisku 'try again i przeladowaniu strony]
  * @param  {event}       [click]
  */
-function onClickTryAgainHandler (event) {
+const onClickTryAgainHandler = (event) => {
     event.preventDefault();
     location.reload();
 }
 
-(function() {
+/**
+ * [funkcja z Listenerami]
+ */
+( () => {
     leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
     rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
     tryAgain.addEventListener( 'click', onClickTryAgainHandler );

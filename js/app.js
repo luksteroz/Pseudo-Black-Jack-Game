@@ -36,10 +36,10 @@ firstTurn( buttons );
  * [funkcja odpowiada za event wykonany na przycisku zawodnika 1]
  * @param  {event} [click]
  */
-function onClickLeftCardHandler ( event ) {
+const onClickLeftCardHandler = ( event ) => {
     event.preventDefault();
 
-    nextTurn( this, rightUserTurn, 2 );
+    nextTurn( event.currentTarget, rightUserTurn, 2 );
 
     cardLeft.hasChildNodes() ? null : createCard(cardLeft, 'left-choosen-card');
 
@@ -53,10 +53,10 @@ function onClickLeftCardHandler ( event ) {
  * [funkcja odpowiada za event wykonany na przycisku zawodnika 2]
  * @param  {event} [click]
  */
-function onClickRightCardHandler ( event ) {
+const onClickRightCardHandler = ( event ) => {
     event.preventDefault();
 
-    nextTurn( this, leftUserTurn, 1 );
+    nextTurn( event.currentTarget, leftUserTurn, 1 );
 
     cardRight.hasChildNodes() ? null : createCard(cardRight, 'right-choosen-card');
 
@@ -71,12 +71,15 @@ function onClickRightCardHandler ( event ) {
      * [po wcisnieciu przycisku 'try again i przeladowaniu strony]
  * @param  {event}       [click]
  */
-function onClickTryAgainHandler (event) {
+const onClickTryAgainHandler = (event) => {
     event.preventDefault();
     location.reload();
 }
 
-(function() {
+/**
+ * [funkcja z Listenerami]
+ */
+( () => {
     leftUserTurn.addEventListener( 'click', onClickLeftCardHandler );
     rightUserTurn.addEventListener( 'click', onClickRightCardHandler );
     tryAgain.addEventListener( 'click', onClickTryAgainHandler );

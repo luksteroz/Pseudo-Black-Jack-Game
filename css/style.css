@@ -43,6 +43,19 @@ body {
     border: 1px solid orange;
 }
 
+#player-left {
+    padding-top: 25px;
+    padding-left: 25px;
+    font-size: 22px;
+}
+
+#player-right {
+    padding-top: 25px;
+    padding-right: 25px;
+    font-size: 22px;
+    text-align: right;
+}
+
 .choosen-card {
     margin: 0 auto;
     height: 400px;
@@ -50,11 +63,12 @@ body {
     background-color: white;
     border-radius: 25px;
     border: 1px solid black;
-    margin-top: 100px;
+    margin-top: 40px;
 }
 
 .name-choosen-card {
     text-align: center;
+    font-size: 40px;
     line-height: 400px;
 }
 
